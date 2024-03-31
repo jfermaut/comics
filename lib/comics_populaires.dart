@@ -202,32 +202,32 @@ class _ComicsPopulairesScreenState extends State<ComicsPopulairesScreen> {
         backgroundColor: Color(0xFF15233D),
         selectedItemColor: Color(0xFF56CCF2),
         unselectedItemColor: Colors.grey[400],
-        currentIndex: 1, // Sélection de l'icône "Comics" dans la BottomNavigationBar
+        currentIndex: 1,
         onTap: (int index) {
           if (index == 0) { // Accueil
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => EcranAccueil()), // Remplace l'écran actuel par l'écran d'accueil
+              MaterialPageRoute(builder: (context) => EcranAccueil()),
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ComicsPopulairesScreen()), // Remplace l'écran actuel par l'écran de comics populaires
+              MaterialPageRoute(builder: (context) => ComicsPopulairesScreen()),
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => SeriesPopulairesScreen()), // Remplace l'écran actuel par l'écran de séries populaires
+              MaterialPageRoute(builder: (context) => SeriesPopulairesScreen()),
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()), // Remplace l'écran actuel par l'écran de films populaires
+              MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()),
             );
           } else if (index == 4){
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => SearchScreen()), // Remplace l'écran actuel par l'écran de recherche
+              MaterialPageRoute(builder: (context) => SearchScreen()),
             );
           }
         },
@@ -246,7 +246,7 @@ class _ComicsPopulairesScreenState extends State<ComicsPopulairesScreen> {
               'assets/SVG/navbar_comics.png',
               width: 24,
               height: 24,
-              color: Color(0xFF56CCF2), // Couleur sélectionnée pour l'icône "Comics"
+              color: Color(0xFF56CCF2),
             ),
             label: 'Comics',
           ),

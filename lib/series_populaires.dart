@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'config.dart';
-
 import 'blocs/Series.dart';
 import 'SerieDetails.dart';
 import 'comics_populaires.dart';
@@ -253,7 +252,7 @@ class _SeriesPopulairesScreenState extends State<SeriesPopulairesScreen> {
               'assets/SVG/navbar_series.png',
               width: 24,
               height: 24,
-              color: Color(0xFF56CCF2), // Couleur sélectionnée pour l'icône "Séries"
+              color: Color(0xFF56CCF2),
             ),
             label: 'Séries',
           ),

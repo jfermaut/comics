@@ -35,7 +35,7 @@ class _ComicsDetailsScreenState extends State<ComicsDetailsScreen> {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final comic = Comic.fromJson(data['results']);
-      _futureCharacters = fetchCharacters(seriesId: comic.id); // Passer le seriesId ici
+      _futureCharacters = fetchCharacters(seriesId: comic.id);
       return comic;
     } else {
       throw Exception('Failed to load serie');

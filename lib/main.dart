@@ -115,7 +115,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF15232E), // Couleur de fond de l'app bar
+        backgroundColor: Color(0xFF15232E),
         title: Row(
           children: [
             Text('Bienvenue !'),
@@ -125,7 +125,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
               child: Image.asset(
                 'assets/SVG/astronaut.png',
                 width: 150,
-                height: MediaQuery.of(context).size.height * 0.3, // Taille relative à la hauteur de l'écran
+                height: MediaQuery.of(context).size.height * 0.3,
               ),
             ),
           ],
@@ -162,7 +162,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Spacer(),
-                        // Bouton "Voir plus"
                         Container(
                           width: 80,
                           height: 35,
@@ -179,7 +178,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                             },
                             child: Text(
                               'Voir plus',
-                              style: TextStyle(fontSize: 12, color: Colors.white), // Couleur du texte en blanc
+                              style: TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
                         ),
@@ -261,7 +260,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Spacer(),
-                        // Bouton "Voir plus"
                         Container(
                           width: 80,
                           height: 35,
@@ -319,10 +317,10 @@ class _EcranAccueilState extends State<EcranAccueil> {
                                       height: 160,
                                       fit: BoxFit.cover,
                                     )
-                                        : Container(), // Placeholder ou indication d'image manquante
+                                        : Container(),
                                     SizedBox(height: 8),
                                     Text(
-                                      comics[index]['volume']['name'] ?? 'Titre inconnu', // Utilise un titre par défaut si 'name' est null
+                                      comics[index]['volume']['name'] ?? 'Titre inconnu',
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ],
@@ -363,7 +361,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Spacer(),
-                        // Bouton "Voir plus"
                         Container(
                           width: 80,
                           height: 35,
@@ -380,7 +377,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                             },
                             child: Text(
                               'Voir plus',
-                              style: TextStyle(fontSize: 12, color: Colors.white), // Couleur du texte en blanc
+                              style: TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
                         ),
@@ -453,25 +450,25 @@ class _EcranAccueilState extends State<EcranAccueil> {
           unselectedItemColor: Colors.grey[400],
           currentIndex: 0,
           onTap: (int index) {
-            if (index == 0) { // Accueil
+            if (index == 0) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => EcranAccueil()), // Remplace l'écran actuel par l'écran d'accueil
+                MaterialPageRoute(builder: (context) => EcranAccueil()),
               );
             } else if (index == 1) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ComicsPopulairesScreen()), // Remplace l'écran actuel par l'écran d'accueil
+                MaterialPageRoute(builder: (context) => ComicsPopulairesScreen()),
               );
             } else if (index == 2) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => SeriesPopulairesScreen()), // Remplace l'écran actuel par l'écran d'accueil
+                MaterialPageRoute(builder: (context) => SeriesPopulairesScreen()),
               );
             } else if (index == 3) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()), // Remplace l'écran actuel par l'écran d'accueil
+                MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()),
               );
             } else if (index == 4){
               Navigator.pushReplacement(

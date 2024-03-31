@@ -7,6 +7,8 @@ import 'films_populaires.dart';
 import 'series_populaires.dart';
 import 'comics_populaires.dart';
 import 'comicsDetails.dart';
+import 'SerieDetails.dart';
+import 'MoviesDetails.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -38,7 +40,6 @@ class _SearchScreenState extends State<SearchScreen> {
         print('Erreur lors de la recherche de comics: ${comicsResponse.statusCode}');
       }
 
-      // Appel d'API pour les films
       final moviesResponse = await http.get(Uri.parse('https://comicvine.gamespot.com/api/movies?api_key=${Config.comicVineApiKey}&format=json&query=$query'));
       if (moviesResponse.statusCode == 200) {
         setState(() {
@@ -51,8 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
         print('Erreur lors de la recherche de films: ${moviesResponse.statusCode}');
       }
 
-      // Appel d'API pour les séries
-      final seriesResponse = await http.get(Uri.parse('https://comicvine.gamespot.com/api/series?api_key=${Config.comicVineApiKey}&format=json&query=$query'));
+      final seriesResponse = await http.get(Uri.parse('https://comicvine.gamespot.com/api/series_list?api_key=${Config.comicVineApiKey}&format=json&query=$query'));
       if (seriesResponse.statusCode == 200) {
         setState(() {
           seriesResults = json.decode(seriesResponse.body)['results'];
@@ -73,7 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
-  Widget _buildComicsSection(List<dynamic> comics) {
+  Widget buildSeriesSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -81,8 +81,79 @@ class _SearchScreenState extends State<SearchScreen> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: comics.map<Widget>((comic) {
-              final title = comic['name'] ?? 'Titre inconnu';
+            children: seriesResults.map<Widget>((series) {
+              final title = series['name'] ?? 'Titre inconnu';
+              final imageUrl = series['image']['small_url'] ?? '';
+
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SerieDetailsScreen(
+                        apiDetailUrl: series['api_detail_url'],
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 200,
+                  height: 240,
+                  margin: EdgeInsets.only(right: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF2D4455),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(
+                            imageUrl,
+                            width: 200,
+                            height: 160,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget buildComicsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: comicsResults.map<Widget>((comic) {
+              final title = comic['volume']['name'] ?? 'Titre inconnu';
               final imageUrl = comic['image']['small_url'] ?? '';
 
               return GestureDetector(
@@ -97,18 +168,110 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
                 child: Container(
-                  width: 180,
-                  height: 200,
-                  color: Color(0xFF2D4455),
+                  width: 200,
+                  height: 240,
+                  margin: EdgeInsets.only(right: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF2D4455),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                           Image.network(
-                        imageUrl,
-                        width: 120,
-                        height: 160,
-                        fit: BoxFit.cover,
-                      )
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(
+                            imageUrl,
+                            width: 200,
+                            height: 160,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget buildMoviesSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: moviesResults.map<Widget>((movies) {
+              final title = movies['name'] ?? 'Titre inconnu';
+              final imageUrl = movies['image']['small_url'] ?? '';
+
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MoviesDetailsScreen(moviesDetails: movies),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 200,
+                  height: 240,
+                  margin: EdgeInsets.only(right: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF2D4455),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(
+                            imageUrl,
+                            width: 200,
+                            height: 160,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -189,35 +352,25 @@ class _SearchScreenState extends State<SearchScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Saisissez une recherche pour trouver un comics, film, série ou personnage',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 18,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        if (isLoading)
-                          Center(child: CircularProgressIndicator())
-                        else
-                          Column(
-                            children: [
-                              _buildComicsSection(comicsResults),
-                              _buildSearchResultsSection("Films", moviesResults),
-                              _buildSearchResultsSection("Séries", seriesResults),
-                            ],
-                          ),
+                        if (searchQuery.toLowerCase() == 'comics')
+                          buildComicsSection()
+                        else if (searchQuery.toLowerCase() == 'series')
+                          buildSeriesSection()
+                        else if (searchQuery.toLowerCase() == 'films')
+                            buildMoviesSection()
+                          else
+                            Column(
+                              children: [
+                                Text(
+                                  'Saisissez une recherche pour trouver un comics, film, série ou personnage',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
                       ],
-                    ),
-                    Positioned(
-                      top: -40,
-                      right: 10,
-                      child: Image.asset(
-                        'assets/SVG/astronaut.png',
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      ),
                     ),
                   ],
                 ),
@@ -245,7 +398,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()));
                 break;
               case 4:
-              // Ne rien faire car nous sommes déjà sur la page de recherche
                 break;
             }
           },
@@ -301,7 +453,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildSearchResultsSection(String title, List<dynamic> results) {
+  Widget buildSearchResultsSection(String title, List<dynamic> results) {
     return results.isEmpty
         ? Container(
       padding: EdgeInsets.all(16),

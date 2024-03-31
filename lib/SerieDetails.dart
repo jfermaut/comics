@@ -37,7 +37,7 @@ class _SerieDetailsScreenState extends State<SerieDetailsScreen> {
       final data = json.decode(response.body);
       final serie = Serie.fromJson(data['results']);
       _futureEpisodes = fetchEpisodes(seriesId: serie.id);
-      _futureCharacters = fetchCharacters(seriesId: serie.id); // Passer le seriesId ici
+      _futureCharacters = fetchCharacters(seriesId: serie.id);
       return serie;
     } else {
       throw Exception('Failed to load serie');

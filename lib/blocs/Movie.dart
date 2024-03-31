@@ -74,9 +74,4 @@ class Movie {
       apiDetailUrl: apiDetailUrl,
     );
   }
-
-
-
-
-
 }

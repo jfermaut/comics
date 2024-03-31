@@ -54,5 +54,4 @@ class Serie {
   void setEpisodes(List<Episode> episodes){
     this.episodes = episodes;
   }
-
 }

@@ -4,8 +4,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:comics/blocs/Movie.dart';
-import 'package:comics/blocs/common.dart';
+
 
 class MoviesDetailsScreen extends StatefulWidget {
   final Map<String, dynamic> moviesDetails;
@@ -191,16 +190,16 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
     return TextButton(
       onPressed: () {
         setState(() {
-          _selectedOption = text; // Mettre à jour l'option sélectionnée
+          _selectedOption = text;
         });
       },
       child: Container(
-        padding: EdgeInsets.only(bottom: 10), // Espace pour le soulignement
+        padding: EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
               color: _selectedOption == text ? Colors.orange : Colors.transparent,
-              width: 2, // Épaisseur du soulignement
+              width: 2,
             ),
           ),
         ),

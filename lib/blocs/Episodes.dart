@@ -1,8 +1,3 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'common.dart';
-import 'package:comics/config.dart';
-
 class Episode {
   final String id;
   final String name;

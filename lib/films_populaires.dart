@@ -7,7 +7,6 @@ import 'series_populaires.dart';
 import 'comics_populaires.dart';
 import 'recherche.dart';
 import 'main.dart';
-import 'package:comics/blocs/Movie.dart';
 
 class FilmsPopulairesScreen extends StatefulWidget {
   @override
@@ -91,9 +90,7 @@ class _FilmsPopulairesScreenState extends State<FilmsPopulairesScreen> {
                               ),
                             ),
                           ),
-                          // Espacement entre l'image et le texte
                           SizedBox(width: 8),
-                          // Contenu à droite de l'image
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +143,6 @@ class _FilmsPopulairesScreenState extends State<FilmsPopulairesScreen> {
                       ),
                     ),
                   ),
-                  // Tag orange en haut à gauche
                   Positioned(
                     top: 0,
                     left: 0,
@@ -176,32 +172,32 @@ class _FilmsPopulairesScreenState extends State<FilmsPopulairesScreen> {
         backgroundColor: Color(0xFF15233D),
         selectedItemColor: Color(0xFF56CCF2),
         unselectedItemColor: Colors.grey[400],
-        currentIndex: 3, // Sélection de l'icône "Films" dans la BottomNavigationBar
+        currentIndex: 3,
         onTap: (int index) {
-          if (index == 0) { // Accueil
+          if (index == 0) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => EcranAccueil()), // Remplace l'écran actuel par l'écran d'accueil
+              MaterialPageRoute(builder: (context) => EcranAccueil()),
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ComicsPopulairesScreen()), // Remplace l'écran actuel par l'écran des comics populaires
+              MaterialPageRoute(builder: (context) => ComicsPopulairesScreen()),
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => SeriesPopulairesScreen()), // Remplace l'écran actuel par l'écran des séries populaires
+              MaterialPageRoute(builder: (context) => SeriesPopulairesScreen()),
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()), // Remplace l'écran actuel par l'écran des films populaires
+              MaterialPageRoute(builder: (context) => FilmsPopulairesScreen()),
             );
           } else if (index == 4){
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => SearchScreen()), // Remplace l'écran actuel par l'écran de recherche
+              MaterialPageRoute(builder: (context) => SearchScreen()),
             );
           }
         },
@@ -229,7 +225,7 @@ class _FilmsPopulairesScreenState extends State<FilmsPopulairesScreen> {
                 'assets/SVG/navbar_series.png',
                 width: 24,
                 height: 24,
-                color: Colors.grey[400] // Couleur sélectionnée pour l'icône "Séries"
+                color: Colors.grey[400]
             ),
             label: 'Séries',
           ),

@@ -1,6 +1,3 @@
-
-
-
 class Series {
   final String id;
   final String imageUrl;
